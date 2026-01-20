@@ -64,7 +64,7 @@ const MyBooks = () => {
                         </thead>
                         <tbody>
                             {myRecords.map(record => {
-                                const book = getBookDetails(record.bookId);
+                                // const book = getBookDetails(record.bookId);
                                 const isOverdue = new Date(record.dueDate) < new Date();
                                 return (
                                     <tr key={record.id} className={isOverdue ? 'row-overdue' : ''}>

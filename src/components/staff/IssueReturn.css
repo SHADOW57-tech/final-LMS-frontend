@@ -1,0 +1,118 @@
+.input-field{
+    width: 600px;
+    padding: 20px;
+    margin: 5px;
+    font-size: 14px;
+    
+}
+.mainform{
+    margin: 130px;
+    padding: 20px;
+    
+}
+.submit-btn{
+    margin-top: 10px;
+    padding: 10px 220px;
+}
+.input-field2{
+    margin: 5px;
+    padding: 20px;
+    width: 1230px;
+
+   }
+   .field{
+    background: #D3D3D3;
+    border-radius: 20px;
+    font-size: 14px;
+   
+   
+   }
+  .book-info{
+    padding-left: 30px;
+    display: flex;
+    width: 100%;
+  }
+  .issue-info{
+    padding-left: 30px;
+    display: flex;
+    width: 100%;
+  }
+
+  .subtitle{
+    font-size: 13px;
+    padding-left: 30px;
+  }
+  .student-info{
+    padding-left: 30px;
+    display: flex;
+    width: 100%;
+  }
+  .input-field3 {
+    border-radius: 20px;
+    background: #D3D3D3;
+    color: black;
+    padding: 10px 250px; 
+    height: 40px;
+  }
+  .input-field[type="date"] {
+    color: black;
+    background-color: #d3d3d3;
+    -webkit-text-fill-color: black;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  .issue-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  .issue-logo img {
+    width: 80px;   /* change this */
+    height: auto;  /* keeps aspect ratio */
+  }
+
+
+
+
+
+
+@media (max-width: 480px) {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    body {
+      overflow-x: hidden;
+    }
+  
+    .mainform {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 16px;
+      box-sizing: border-box;
+     
+    }
+  
+    .submit-btn{
+        padding: 10px 70px;
+    }
+   .input-field2{
+    margin: 5px;
+    padding: 20px;
+    width: 315px;
+    display: flex;
+   }
+   .input-field3{
+    display: none;
+   }
+   .input-field[type="date"] {
+    color: black;
+    -webkit-text-fill-color: black; /* Safari & Chrome fix */
+  }
+  }
+  
