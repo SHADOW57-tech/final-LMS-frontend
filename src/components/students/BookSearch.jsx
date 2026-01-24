@@ -11,7 +11,7 @@ export default function BookSearchPage() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");  
-  const alphabet = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  
 
   const fetchAllBooks = async () => {
     try {
@@ -54,16 +54,21 @@ setBooks(response.data.data);
   };
   
   const groupedBooks = useMemo(() => {
-    if (!Array.isArray(books)) return {};
     const groups = {};
+  
     books.forEach((book) => {
-      const firstChar = book.title?.charAt(0)?.toUpperCase() || "#";
-      const key = /[0-9]/.test(firstChar) ? "#" : firstChar;
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(book);
+      const category = book.category?.trim() || "Uncategorized";
+  
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+  
+      groups[category].push(book);
     });
+  
     return groups;
   }, [books]);
+  
   
   
 
@@ -129,29 +134,40 @@ setBooks(response.data.data);
 
       {/* --- Grouped Results --- */}
       <div className="px-4 pb-12">
-        {Object.keys(groupedBooks).length > 0 ? (
-          Object.keys(groupedBooks).sort().map((letter) => (
-            <div key={letter} className="mb-8">
-              <h2 className="text-5xl font-bold text-white/80 px-2 mb-2">{letter}</h2>
-              
-              {groupedBooks[letter].map((book) => (
-                <div 
-                  key={book.id} 
-                  className="flex justify-between items-end py-5 border-b border-gray-400/40 px-2"
-                >
-                  <h3 className="text-xl font-bold text-red-900 underline decoration-red-900 underline-offset-4 cursor-pointer">
-                    {book.title}
-                  </h3>
-                  <p className="text-sm font-bold text-black italic">
-                    Available ({book.available})
-                  </p>
-                </div>
-              ))}
-            </div>
-          ))
-        ) : (
-          <div className="text-center mt-20 text-black/50 font-medium">No results found</div>
-        )}
+      {Object.keys(groupedBooks).length > 0 ? (
+  Object.keys(groupedBooks).sort().map((category) => (
+    <div key={category} className="mb-10">
+      <h2 className="text-3xl font-bold text-white px-2 mb-4">
+        {category}
+      </h2>
+
+      {groupedBooks[category].map((book) => (
+        <div
+          key={book.id}
+          className="flex justify-between items-end py-4 border-b border-gray-400/40 px-2"
+        >
+          <div>
+            <h3 className="text-lg font-bold text-red-900 underline cursor-pointer">
+              {book.title}
+            </h3>
+            <p className="text-sm text-black italic">
+              {book.author}
+            </p>
+          </div>
+
+          <p className="text-sm font-bold text-black">
+            Available ({book.available})
+          </p>
+        </div>
+      ))}
+    </div>
+  ))
+) : (
+  <div className="text-center mt-20 text-black/50 font-medium">
+    No books available
+  </div>
+)}
+
       </div>
     </div>
   );
