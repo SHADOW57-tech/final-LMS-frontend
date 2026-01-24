@@ -44,7 +44,7 @@ setBooks(response.data.data);
       setError("");
       setLoading(true);
       const response = await searchBooks(value);
-setBooks(response.data.data);
+      setBooks(response.data?.data || []);
 
     } catch (err) {
       setError("Search failed");
@@ -55,19 +55,17 @@ setBooks(response.data.data);
   
   const groupedBooks = useMemo(() => {
     const groups = {};
+    if (!books || books.length === 0) return groups;
   
     books.forEach((book) => {
       const category = book.category?.trim() || "Uncategorized";
-  
-      if (!groups[category]) {
-        groups[category] = [];
-      }
-  
+      if (!groups[category]) groups[category] = [];
       groups[category].push(book);
     });
   
     return groups;
   }, [books]);
+  
   
   
   
@@ -117,7 +115,7 @@ setBooks(response.data.data);
 
       {/* --- Alphabet Navigation Strip --- */}
       <div className="flex items-center overflow-x-auto py-4 px-4 no-scrollbar whitespace-nowrap">
-        
+
       </div>
 
       {loading && <div className="text-center mt-10">Loading books...</div>}
