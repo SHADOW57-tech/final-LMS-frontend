@@ -28,13 +28,11 @@ const StudentSignup = () => {
       [e.target.name]: e.target.value,
     });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
-    // 1️⃣ Frontend validation (KEEP THIS)
+
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -51,18 +49,17 @@ const StudentSignup = () => {
       setError("All fields are required.");
       return;
     }
-  
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
-  
+
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
-  
-    // 2️⃣ API CALL (NEW PART)
+
     try {
       const payload = {
         firstName: formData.firstName,
@@ -77,25 +74,24 @@ const StudentSignup = () => {
         password: formData.password,
         role: "student",
       };
-  
+
       const response = await studentSignup(payload);
-  
-      // Optional: save token if backend sends it
+
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }
-  
+
       navigate("/login");
     } catch (err) {
       setError(
         err.response?.data?.message ||
-        "Student signup failed. Please try again."
+          "Student signup failed. Please try again."
       );
     }
   };
-  
+
   return (
-    <div className="flex items-center justify-center   relative">
+    <div className="flex items-center justify-center relative">
       {/* Background semi-circle */}
       <div className="absolute inset-0">
         <div className="absolute bottom-0 left-0 right-0 h-[95%] bg-sky-300 rounded-t-[50%]"></div>
@@ -115,32 +111,34 @@ const StudentSignup = () => {
 
         <div className="md:w-full mb-4">
           <label className="block text-sm text-gray-700 mb-1">Full Name:</label>
-        <div className="w-full mb-4 flex gap-4">
-          <div className="flex-1">
-            <label className="block text-sm text-gray-700 mb-1">First Name:</label>
-            <input
-              type="text"
-              name="firstName"
-              placeholder="John"
-              required
-              value={formData.firstName}
-              onChange={handleChange}
-              className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm text-gray-700 mb-1">Last Name:</label>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Doe"
-              required
-              value={formData.lastName}
-              onChange={handleChange}
-              className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
-            />
+          <div className="w-full mb-4 flex gap-4">
+            <div className="flex-1">
+              <label className="block text-sm text-gray-700 mb-1">First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="John"
+                required
+                value={formData.firstName}
+                onChange={handleChange}
+                className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-sm text-gray-700 mb-1">Last Name:</label>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Doe"
+                required
+                value={formData.lastName}
+                onChange={handleChange}
+                className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
+              />
+            </div>
           </div>
         </div>
+
         <div className="w-full mb-4">
           <label className="block text-sm text-gray-700 mb-1">Phone Number:</label>
           <input
@@ -155,10 +153,7 @@ const StudentSignup = () => {
         </div>
 
         <div className="md:w-full mb-4">
-          <label className="block text-sm text-gray-700 mb-1">
-            Matric Number:
-          </label>
-        <div className="w-full mb-4">
+          
           <label className="block text-sm text-gray-700 mb-1">Matric Number:</label>
           <input
             type="text"
@@ -173,30 +168,31 @@ const StudentSignup = () => {
 
         <div className="md:w-full mb-4">
           <label className="block text-sm text-gray-700 mb-1">Course:</label>
-        <div className="w-full mb-4 flex gap-4">
-          <div className="flex-1">
-            <label className="block text-sm text-gray-700 mb-1">Entry Year:</label>
-            <input
-              type="number"
-              name="entryYear"
-              placeholder="2024"
-              required
-              value={formData.entryYear}
-              onChange={handleChange}
-              className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm text-gray-700 mb-1">Program Duration:</label>
-            <input
-              type="number"
-              name="programDuration"
-              required
-              placeholder="4"
-              value={formData.programDuration}
-              onChange={handleChange}
-              className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
-            />
+          <div className="w-full mb-4 flex gap-4">
+            <div className="flex-1">
+              <label className="block text-sm text-gray-700 mb-1">Entry Year:</label>
+              <input
+                type="number"
+                name="entryYear"
+                placeholder="2024"
+                required
+                value={formData.entryYear}
+                onChange={handleChange}
+                className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-sm text-gray-700 mb-1">Program Duration:</label>
+              <input
+                type="number"
+                name="programDuration"
+                required
+                placeholder="4"
+                value={formData.programDuration}
+                onChange={handleChange}
+                className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
+              />
+            </div>
           </div>
         </div>
 
@@ -246,7 +242,7 @@ const StudentSignup = () => {
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Min 6 characters"
-            
+
               value={formData.password}
               onChange={handleChange}
               className="w-full px-5 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
@@ -263,10 +259,7 @@ const StudentSignup = () => {
         </div>
 
         <div className="md:w-full mb-6">
-        <div className="w-full mb-6">
-          <label className="block text-sm text-gray-700 mb-1">
-            Confirm Password:
-          </label>
+          <label className="block text-sm text-gray-700 mb-1">Confirm Password:</label>
           <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}
