@@ -69,6 +69,48 @@ const MyBooks = () => {
       <DashboardLayout>
         <div className="flex justify-center items-center h-64 text-gray-500 text-lg">
           Loading your books...
+        <div className="my-books-container">
+            <h2 className="my-books-title">My Borrowed Books</h2>
+
+            {/* Placeholder overdue notifications workflow */}
+            <OverdueNotifications studentId={studentId} />
+
+            {myRecords.length === 0 ? (
+                <p>You have no borrowed books.</p>
+            ) : (
+                <div className="table-wrapper">
+                    <table className="books-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {myRecords.map(record => {
+                                // const book = getBookDetails(record.bookId);
+                                const isOverdue = new Date(record.dueDate) < new Date();
+                                return (
+                                    <tr key={record.id} className={isOverdue ? 'row-overdue' : ''}>
+                                        <td>{record?.title || 'Unknown Title'}</td>
+                                        <td>{record?.author || 'Unknown Author'}</td>
+                                        <td className={isOverdue ? 'text-overdue' : ''}>
+                                            {record.dueDate} {isOverdue && '(Overdue)'}
+                                        </td>
+                                        <td>
+                                            <span className={`status-badge ${isOverdue ? 'status-overdue' : 'status-active'}`}>
+                                                {isOverdue ? 'Overdue' : 'Active'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
       </DashboardLayout>
     );
