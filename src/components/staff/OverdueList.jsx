@@ -1,4 +1,5 @@
 import React from 'react';
+import DashboardLayout from '../layout/DashboardLayout';
 
 const OverdueList = () => {
   const overdueData = [
@@ -7,6 +8,7 @@ const OverdueList = () => {
   ];
 
   return (
+    <DashboardLayout>
     <div style={{ padding: '20px', border: '1px solid #ccc', margin: '10px' }}>
       <h2>Staff: Overdue Books List</h2>
       <ul>
@@ -18,6 +20,7 @@ const OverdueList = () => {
         ))}
       </ul>
     </div>
+    </DashboardLayout>
   );
 };
 

@@ -11,14 +11,18 @@ import Operation from "./components/staff/Operation";
 import IssueReturn from "./components/staff/IssueReturn";
 import OverdueList from "./components/staff/OverdueList";
 import MessageCard from "./pages/MessageCard";
+import Dashboard from "./components/Dashboard";
+import AddBook from "./components/staff/AddBook";
 
 
 const App = () => {
   return (
     <>
 <Routes>
-  <Route path="/" element={<LandingPage />} />
   <Route path="/messagecard" element={<MessageCard />} />
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/addbooks" element={<AddBook />} />
+  <Route path="/" element={<LandingPage />} />
   <Route path="/signup/student" element={<StudentSignup />} />
   <Route path="/signup/staff" element={<StaffSignup />} />
   <Route path="/login" element={<LoginPage />} />
